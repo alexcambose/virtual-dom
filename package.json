@@ -1,0 +1,27 @@
+{
+  "name": "virtual-dom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcambose/virtual-dom.git"
+  },
+  "keywords": [],
+  "author": "Alexandru Cambose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexcambose/virtual-dom/issues"
+  },
+  "homepage": "https://github.com/alexcambose/virtual-dom#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
+  }
+}
