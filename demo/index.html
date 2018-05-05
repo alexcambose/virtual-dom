@@ -11,30 +11,14 @@
     <script src="../dist/virtual-dom.js"></script>
     <script>
         const appContainer = document.getElementById('app');
-        const createContent = (color, text) => ({
-            type: 'div',
-            props: {
-                className: 'section',
-                children: [
-                    {
-                        type: 'h1',
-                        props: {
-                            style: {color},
-                            children: ['Hello, ', text],
-                        },
-                    },
-                    {
-                        type: 'button',
-                        props: {
-                            onClick: e => console.log(e),
-                            children: ['Click me!'],
-                        },
-                    }
-                ]
-            }
-        });
-
-        render(appContainer, createContent('red', 'hehe'));
+        let color = 'red';
+        const createContent = (color) => (
+            h('div', { className: 'section' },
+                h('h1', { style: {color} }, 'Todo'),
+                h('button', { onClick: e => console.log(e) }, 'Click me!'),
+            )
+        )
+        render(appContainer, createContent('red'));
     </script>
 </body>
 </html>

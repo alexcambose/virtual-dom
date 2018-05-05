@@ -48,7 +48,8 @@ export const applyProps = ($node, props) => {
             $node.setAttribute('class', props[propName]);
         } else if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) {
             $node.addEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), e => props[propName](e));
-            console.log('added')
+        } else if (propName === 'style') {
+            for(let styleName in props['style']) $node.style[styleName] = props['style'][styleName];
         } else {
             $node.setAttribute(propName, props[propName]);
         }
