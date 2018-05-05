@@ -11,5 +11,8 @@ module.exports = {
     devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : '',
     plugins: [
         new UglifyJsPlugin()
-    ]
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "demo"),
+      }
 };

@@ -1,2 +1,2 @@
 # virtual-dom
-Simple diffing algorithm
+A Virtual DOM implementation algorithm

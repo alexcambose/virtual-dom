@@ -1,13 +1,15 @@
 import diff from './diff';
 import patch from './patch';
 import render from './render';
+import h from './h';
 
-if(!module) {
+if(module && !module.exports) {
+    console.log('wtf')
     window.diff = diff;
     window.patch = patch;
     window.render = render;
+    window.h = h;
 }
-
 export {
-    diff, patch, render
+    diff, patch, render, h
 }

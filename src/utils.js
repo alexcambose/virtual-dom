@@ -1,4 +1,5 @@
 export const isObject = value => typeof value === 'object' && !Array.isArray(value);
+export const isFunction = value => !!(value && value.constructor && value.call && value.apply); // https://jsperf.com/alternative-isfunction-implementations
 export const isString = value => typeof value === 'string';
 export const isArray = value => Array.isArray(value);
 
@@ -45,6 +46,9 @@ export const applyProps = ($node, props) => {
     for(let propName in props) {
         if(propName.toLowerCase() === 'classname') {
             $node.setAttribute('class', props[propName]);
+        } else if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) {
+            $node.addEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), e => props[propName](e));
+            console.log('added')
         } else {
             $node.setAttribute(propName, props[propName]);
         }

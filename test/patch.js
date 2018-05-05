@@ -1,8 +1,8 @@
 const { PATCH_INSERT_NODE, PATCH_REPLACE_NODE, PATCH_REMOVE_NODE, PATCH_TEXT_NODE, PATCH_PROPS_NODE } = require('../src/constants');
 
-const assert = require('chai').assert;
-const { diff, patch, render } = require('../src/index');
-const { JSDOM } = require("jsdom");
+import { assert } from 'chai';
+import { diff, patch, render } from '../src/index';
+import { JSDOM } from 'jsdom';
 
 describe('patch', () => {
     const element = { type: "h1", props: { className: "title", id: 'theid', children: ["text1", "text2"] } };

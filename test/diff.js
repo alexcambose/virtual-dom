@@ -6,8 +6,8 @@ const {
     PATCH_PROPS_NODE
 } = require('../src/constants');
 
-const assert = require('chai').assert;
-const { diff } = require('../src/index');
+import { assert } from 'chai';
+import { diff } from '../src/index';
 
 describe('diff', () => {
     describe('props', () => {
