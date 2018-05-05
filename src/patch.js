@@ -1,4 +1,6 @@
 import { PATCH_INSERT_NODE, PATCH_REPLACE_NODE, PATCH_REMOVE_NODE, PATCH_TEXT_NODE, PATCH_PROPS_NODE } from './constants';
+import { applyProps, createNode } from './utils';
+
 
 const applyPatch = ($node, patch) => {
     switch (patch.type) {
@@ -21,11 +23,20 @@ const applyPatch = ($node, patch) => {
 };
 
 const applyPatches = ($root, patches, index = 0) => {
-    console.log($root.childNodes[index], index, patches[index])
-
-    applyPatch($root.childNodes[index] || $root, patches[index]);
-    for(let patchKey in patches['patches'])
-        applyPatches($root.childNodes[index], patches['patches'], parseInt(patchKey));
+    if (patches && patches[index]) {
+        if (patches[index]["selfPatch"])
+            applyPatch(
+                $root.childNodes[index] || $root,
+                patches[index]["selfPatch"]
+            );
+        for (let patchKey in patches[index]["childrenPatches"]) {
+            applyPatches(
+                $root.childNodes[index],
+                patches[index]["childrenPatches"],
+                parseInt(patchKey)
+            );
+        }
+    }
 };
 
 export default applyPatches;

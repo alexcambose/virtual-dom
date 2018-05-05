@@ -1,11 +1,15 @@
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path');
+
 module.exports = {
     entry: './src/index',
     output: {
-        path: __dirname,
+        path: path.resolve(__dirname, 'dist'),
         filename: 'virtual-dom.js',
     },
-    mode: 'development',
-    devtool: 'source-map',
+    mode: process.env.NODE_ENV || 'production',
+    devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : '',
+    plugins: [
+        new UglifyJsPlugin()
+    ]
 };

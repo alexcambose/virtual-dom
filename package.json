@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require babel-core/register",
-    "build": "webpack",
-    "cover": "nyc report mocha --require babel-core/register  --reporter=lcov"
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -25,9 +24,9 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chai": "^4.1.2",
-    "istanbul": "^0.4.5",
+    "jsdom": "^11.10.0",
     "mocha": "^5.1.1",
-    "nyc": "^11.7.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15"
   }
