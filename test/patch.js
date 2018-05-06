@@ -11,7 +11,7 @@ describe('patch', () => {
 
     it('text changes', () => {
         global.document = _document;
-        render(containerApp, element);
+        render(element, containerApp);
         let newElement = JSON.parse(JSON.stringify(element));
         newElement.props.children[0] = 'something1';
         newElement.props.children[1] = 'something2';
@@ -22,7 +22,7 @@ describe('patch', () => {
     });
     it('props changes', () => {
         global.document = _document;
-        render(containerApp, element);
+        render(element, containerApp);
         let newElement = JSON.parse(JSON.stringify(element));
         newElement.props.className = 'something1';
         newElement.props.id = 'something2';
@@ -34,7 +34,7 @@ describe('patch', () => {
     it('deep text, props and children changes', () => {
         global.document = _document;
         containerApp.innerHTML = '';
-        render(containerApp, element);
+        render(element, containerApp);
         let newElement = JSON.parse(JSON.stringify(element));
         newElement.props.className = 'something1';
         newElement.props.id = 'something2';

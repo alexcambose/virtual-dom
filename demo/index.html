@@ -11,14 +11,26 @@
     <script src="../dist/virtual-dom.js"></script>
     <script>
         const appContainer = document.getElementById('app');
-        let color = 'red';
+        let headerColor = 'red';
         const createContent = (color) => (
             h('div', { className: 'section' },
                 h('h1', { style: {color} }, 'Todo'),
-                h('button', { onClick: e => console.log(e) }, 'Click me!'),
+                h('button', { onClick: e => { headerColor = 'red'; rerender(); } }, 'Red'),
+                h('button', { onClick: e => { headerColor = 'yellow'; rerender(); } }, 'Yellow'),
+                h('button', { onClick: e => { headerColor = 'blue'; rerender(); } }, 'Blue'),
             )
         )
-        render(appContainer, createContent('red'));
+        let newContent = null;
+        let content = createContent(headerColor);
+        render(content, appContainer);
+        const rerender = () => {
+            newContent = createContent(headerColor);
+            const patches = diff(content, newContent);
+            patch(appContainer, patches);
+            console.log(patches)
+            content = newContent;
+        };
+
     </script>
 </body>
 </html>

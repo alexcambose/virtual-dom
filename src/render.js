@@ -1,3 +1,3 @@
 import { appendNode, createNode } from "./utils";
 
-export default ($root, element) => appendNode($root, createNode(element));
+export default (element, $root) => appendNode($root, createNode(element));

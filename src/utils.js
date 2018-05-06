@@ -47,13 +47,14 @@ export const applyProps = ($node, props) => {
         if(propName.toLowerCase() === 'classname') {
             $node.setAttribute('class', props[propName]);
         } else if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) {
-            $node.addEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), e => props[propName](e));
+            $node.removeEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), props[propName]);
+            $node.addEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), props[propName]);
+            console.log('add', $node, )
         } else if (propName === 'style') {
             for(let styleName in props['style']) $node.style[styleName] = props['style'][styleName];
         } else {
             $node.setAttribute(propName, props[propName]);
         }
-
     }
 };
 export const createNode = data => {
