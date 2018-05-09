@@ -26,8 +26,9 @@
         const rerender = () => {
             newContent = createContent(headerColor);
             const patches = diff(content, newContent);
+            // console.log(patches);
             patch(appContainer, patches);
-            console.log(patches)
+
             content = newContent;
         };
 

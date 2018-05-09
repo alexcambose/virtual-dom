@@ -10,7 +10,7 @@ export const objectIsEqual = (firstObj, lastObj) => {
         }
         return true;
     }
-    return firstObj === lastObj;
+    return firstObj === lastObj; // +'' for functinon check
 };
 
 export const flatternArray = array => {
@@ -40,20 +40,23 @@ export const createNodeFromObject = data => {
             appendNode($node, createNode(child));
     return $node;
 };
-export const applyProps = ($node, props) => {
+export const applyProps = ($node, props, oldProps) => {
     while($node.attributes.length > 0) // remove old attributes, TODO not the best way to do tho
         $node.removeAttribute($node.attributes[0].name);
-    for(let propName in props) {
-        if(propName.toLowerCase() === 'classname') {
+
+    for(let propName in props) { // loop through all new props
+        if(propName.toLowerCase() === 'classname') { // set class
             $node.setAttribute('class', props[propName]);
-        } else if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) {
-            $node.removeEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), props[propName]);
-            $node.addEventListener(propName.match(/^on([A-Z].*)/)[1].toLowerCase(), props[propName]);
-            console.log('add', $node, )
-        } else if (propName === 'style') {
+        } else if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) { // chack for events (ex: onClick)
+            const eventName = propName.match(/^on([A-Z].*)/)[1].toLowerCase();
+
+            if(oldProps && oldProps[propName]) // remove old event if exists
+                $node.removeEventListener(eventName, oldProps[propName]);
+            $node.addEventListener(eventName, props[propName]); // add the new event
+        } else if (propName === 'style') { // set styles
             for(let styleName in props['style']) $node.style[styleName] = props['style'][styleName];
-        } else {
-            $node.setAttribute(propName, props[propName]);
+        } else { // any props remaining (ex: id)
+            $node.setAttribute(propName, props[propName], oldProps[propName]);
         }
     }
 };

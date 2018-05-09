@@ -8,10 +8,10 @@ module.exports = {
         filename: 'virtual-dom.js',
     },
     mode: process.env.NODE_ENV || 'production',
-    devtool: process.env.NODE_ENV !== 'production' ? 'source-map' : '',
-    plugins: [
-        new UglifyJsPlugin()
-    ],
+    devtool: process.env.NODE_ENV !== 'production' ? 'inline-source-map' : '',
+    // plugins: [
+    //     new UglifyJsPlugin()
+    // ],
     devServer: {
         contentBase: path.join(__dirname, "demo"),
       }

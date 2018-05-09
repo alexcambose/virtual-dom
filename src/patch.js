@@ -17,7 +17,7 @@ const applyPatch = ($node, patch) => {
             $node.remove();
             break;
         case PATCH_PROPS_NODE:
-            applyProps($node, patch.payload);
+            applyProps($node, patch.payload.props, patch.payload.oldProps);
             break;
     }
 };

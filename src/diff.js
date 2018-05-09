@@ -14,7 +14,7 @@ const diff = (oldVDOM, newVDOM, index = 0) => {
     if (!newVDOM && oldVDOM) {
         selfPatch = {type: PATCH_REMOVE_NODE, payload: oldVDOM};
     } else if (newVDOM && !oldVDOM) {
-    selfPatch = {type: PATCH_INSERT_NODE, payload: newVDOM};
+        selfPatch = {type: PATCH_INSERT_NODE, payload: newVDOM};
     } else if((isString(oldVDOM) && isObject(newVDOM)) || // check types between new and old VDOM and replace if different
         isObject(oldVDOM) && isString(newVDOM) ||
         oldVDOM.type !== newVDOM.type) {
@@ -23,14 +23,17 @@ const diff = (oldVDOM, newVDOM, index = 0) => {
         selfPatch = {type: PATCH_TEXT_NODE, payload: newVDOM};
     } else if(isObject(newVDOM) && isObject(oldVDOM)) { // if both are nodes object we need to check for props and go deeper
         // check if props are different
-        const newProps = diffProps(oldVDOM.props, newVDOM.props);
-        if(newProps) {
-            selfPatch = { type: PATCH_PROPS_NODE, payload: newProps };
+        if(diffProps(oldVDOM.props, newVDOM.props)) {
+            const props = newVDOM.props; // new props
+            const oldProps = oldVDOM.props; // old props
+            delete props.children;
+            delete oldProps.children;
+            selfPatch = { type: PATCH_PROPS_NODE, payload: { props, oldProps } };
         }
         const oldVDOMChildren = flatternArray(oldVDOM.props.children);
         const newVDOMChildren = flatternArray(newVDOM.props.children);
         //get the longest child element
-        let childrenLength = (oldVDOMChildren.length > newVDOMChildren.length ? oldVDOMChildren.length : newVDOMChildren.length)
+        let childrenLength = Math.max(oldVDOMChildren.length, newVDOMChildren.length);
         for (let i = 0; i < childrenLength; i++){
             childrenPatches = { ...childrenPatches, ...diff(oldVDOMChildren[i], newVDOMChildren[i], i) };
         }
