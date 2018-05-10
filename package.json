@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require babel-core/register",
-    "build": "NODE_ENV=production webpack",
+    "prod": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=development webpack",
     "watch": "NODE_ENV=development webpack --watch"
   },
   "repository": {
@@ -21,7 +22,9 @@
   "homepage": "https://github.com/alexcambose/virtual-dom#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "babel-core": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-loader": "^7.1.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chai": "^4.1.2",

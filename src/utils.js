@@ -1,16 +1,16 @@
-export const isObject = value => typeof value === 'object' && !Array.isArray(value);
+export const isObject = value => typeof value === 'object' && !Array.isArray(value) && value !== null;
 export const isFunction = value => !!(value && value.constructor && value.call && value.apply); // https://jsperf.com/alternative-isfunction-implementations
 export const isString = value => typeof value === 'string';
 export const isArray = value => Array.isArray(value);
 
 export const objectIsEqual = (firstObj, lastObj) => {
-    if(typeof firstObj === 'object' && typeof lastObj === 'object') {
+    if(isObject(firstObj) && isObject(lastObj)) {
         for(let key of Object.keys(firstObj)) {
             if (!objectIsEqual(firstObj[key], lastObj[key])) return false;
         }
         return true;
     }
-    return firstObj === lastObj; // +'' for functinon check
+    return firstObj+'' === lastObj+''; // +'' for functinon check
 };
 
 export const flatternArray = array => {
@@ -45,18 +45,32 @@ export const applyProps = ($node, props, oldProps) => {
         $node.removeAttribute($node.attributes[0].name);
 
     for(let propName in props) { // loop through all new props
-        if(propName.toLowerCase() === 'classname') { // set class
-            $node.setAttribute('class', props[propName]);
-        } else if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) { // chack for events (ex: onClick)
-            const eventName = propName.match(/^on([A-Z].*)/)[1].toLowerCase();
+        if (propName.match(/^on([A-Z].*)/) && isFunction(props[propName])) { // chack for events (ex: onClick)
+            let eventName = propName.match(/^on([A-Z].*)/)[1].toLowerCase();
+
+            if(eventName === 'onchange') eventName = 'oninput'; // transform onChange in onInput, see https://github.com/facebook/react/issues/3964
 
             if(oldProps && oldProps[propName]) // remove old event if exists
                 $node.removeEventListener(eventName, oldProps[propName]);
             $node.addEventListener(eventName, props[propName]); // add the new event
         } else if (propName === 'style') { // set styles
             for(let styleName in props['style']) $node.style[styleName] = props['style'][styleName];
-        } else { // any props remaining (ex: id)
-            $node.setAttribute(propName, props[propName], oldProps[propName]);
+        } else { // any props remaining (ex: id, class)
+            let attributeName = propName.toLowerCase();
+            let attributeValue = props[propName];
+
+            //replace different name attributes, see https://github.com/facebook/react/blob/dcc854bcc3c940ca583565ce25200ca618c05bf0/packages/react-dom/src/shared/DOMProperty.js#L230
+            if(propName.toLowerCase() === 'classname') propName = 'class'; // replace className with class
+            [['acceptCharset', 'accept-charset'],
+            ['className', 'class'],
+            ['htmlFor', 'for'],
+            ['httpEquiv', 'http-equiv']].forEach(([name, replacementValue]) => {
+                if(attributeName === name.toLowerCase()) attributeName = replacementValue;
+            })
+            if(attributeValue !== null) { // avoid null values
+                // set the prop
+                $node.setAttribute(attributeName, attributeValue);
+            }
         }
     }
 };

@@ -24,7 +24,10 @@ describe('diff', () => {
                 0: {
                     selfPatch: {
                         type: PATCH_PROPS_NODE,
-                        payload: { className: 'footer', id: 'main' }
+                        payload: {
+                            oldProps: {className: 'header', id: 'main'},
+                            props: {className: 'footer', id: 'main'},
+                         }
                     }
                 }
             });

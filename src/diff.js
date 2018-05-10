@@ -24,8 +24,8 @@ const diff = (oldVDOM, newVDOM, index = 0) => {
     } else if(isObject(newVDOM) && isObject(oldVDOM)) { // if both are nodes object we need to check for props and go deeper
         // check if props are different
         if(diffProps(oldVDOM.props, newVDOM.props)) {
-            const props = newVDOM.props; // new props
-            const oldProps = oldVDOM.props; // old props
+            const props = Object.assign({}, newVDOM.props); // new props
+            const oldProps = Object.assign({}, oldVDOM.props); // old props
             delete props.children;
             delete oldProps.children;
             selfPatch = { type: PATCH_PROPS_NODE, payload: { props, oldProps } };

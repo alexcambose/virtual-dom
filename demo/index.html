@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Demo</title>
+    <style>
+        button {
+            width: 70px;
+        }
+        .selected {
+            font-weight: 800;
+        }
+    </style>
 </head>
 <body>
     <div id="app"></div>
@@ -12,12 +20,15 @@
     <script>
         const appContainer = document.getElementById('app');
         let headerColor = 'red';
+        let title = 'Hello world';
         const createContent = (color) => (
             h('div', { className: 'section' },
-                h('h1', { style: {color} }, 'Todo'),
-                h('button', { onClick: e => { headerColor = 'red'; rerender(); } }, 'Red'),
-                h('button', { onClick: e => { headerColor = 'yellow'; rerender(); } }, 'Yellow'),
-                h('button', { onClick: e => { headerColor = 'blue'; rerender(); } }, 'Blue'),
+                h('h1', { style: {color} }, title),
+                h('input', { id: 'asd', onInput: e => { title = e.target.value; rerender(); }}),
+                h('br'),
+                h('button', { className: (headerColor == 'red' ? 'selected' : null),  onClick: e => { headerColor = 'red'; rerender(); } }, 'Red'),
+                h('button', { className: (headerColor == 'yellow' ? 'selected' : null),  onClick: e => { headerColor = 'yellow'; rerender(); } }, 'Yellow'),
+                h('button', { className: (headerColor == 'blue' ? 'selected' : null),  onClick: e => { headerColor = 'blue'; rerender(); } }, 'Blue'),
             )
         )
         let newContent = null;
@@ -26,9 +37,7 @@
         const rerender = () => {
             newContent = createContent(headerColor);
             const patches = diff(content, newContent);
-            // console.log(patches);
             patch(appContainer, patches);
-
             content = newContent;
         };
 

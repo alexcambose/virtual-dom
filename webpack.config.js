@@ -10,9 +10,22 @@ module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: process.env.NODE_ENV !== 'production' ? 'inline-source-map' : '',
     // plugins: [
-    //     new UglifyJsPlugin()
+    //     new UglifyJsPlugin({
+    //         sourceMap: process.env.NODE_ENV !== 'production',
+    //     })
     // ],
     devServer: {
         contentBase: path.join(__dirname, "demo"),
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                use: {
+                    loader: 'babel-loader',
+                },
+            },
+        ]
       }
 };
