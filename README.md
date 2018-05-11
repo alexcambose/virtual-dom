@@ -57,7 +57,7 @@ const rerender = () => {
 ```js
 h('div', { className: 'section' },
     h('h1', { style: {color: 'red'} }, 'Section title'),
-))
+));
 ```
 will output
 ```js
@@ -85,7 +85,7 @@ will output
 * `render(VDOM, domElement)` - renders the virtual dom object into a specified element in dom
 ```js
 // content = h(..., h(...))
-render(content, document.getElementById('app'))
+render(content, document.getElementById('app'));
 ```
 * `diff(oldVDOM, newVDOM)` - create a *patches object* that contains all the differences between two virtual-dom objects, should be used with `patch`
 ```js

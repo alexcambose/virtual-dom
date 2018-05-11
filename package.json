@@ -1,5 +1,5 @@
 {
-  "name": "virtual-dom",
+  "name": "@alexcambose/virtual-dom",
   "version": "1.0.0",
   "description": "A Virtual DOM algorithm implementation that improves front end performance by updating only changed nodes in the DOM.",
   "main": "index.js",
@@ -22,7 +22,7 @@
       "diffing",
       "dom-manipulation",
       "dom-events",
-      "dom-tree",
+      "dom-tree"
   ],
   "author": "Alexandru Cambose",
   "license": "MIT",
