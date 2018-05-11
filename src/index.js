@@ -3,8 +3,7 @@ import patch from './patch';
 import render from './render';
 import h from './h';
 
-if(module && !module.exports) {
-    console.log('wtf')
+if(typeof window !== 'undefined') {
     window.diff = diff;
     window.patch = patch;
     window.render = render;

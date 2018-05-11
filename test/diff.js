@@ -32,6 +32,30 @@ describe('diff', () => {
                 }
             });
         });
+        it('detects new prop added if null', () => {
+            const A = {
+                type: 'div',
+                props: { children: ['Hello']}
+            };
+            const B = {
+                type: 'div',
+                props: { className: 'footer', id: 'main', children: ['Hello1'] }
+            };
+            assert.deepEqual(diff(A, B), {
+                0: {
+                    selfPatch: {
+                        type: PATCH_PROPS_NODE,
+                        payload: {
+                            oldProps: {},
+                            props: {className: 'footer', id: 'main'},
+                         }
+                    },
+                    childrenPatches: {
+                        0: { selfPatch: { type: PATCH_TEXT_NODE,"payload":"Hello1" }}
+                    }
+                }
+            });
+        });
     });
     describe('props.children', () => {
         it('detects text changes', () => {

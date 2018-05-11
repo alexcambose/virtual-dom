@@ -8,7 +8,7 @@ export const objectIsEqual = (firstObj, lastObj) => {
         for(let key of Object.keys(firstObj)) {
             if (!objectIsEqual(firstObj[key], lastObj[key])) return false;
         }
-        return true;
+        return Object.keys(firstObj).length === Object.keys(lastObj).length;
     }
     return firstObj+'' === lastObj+''; // +'' for functinon check
 };
