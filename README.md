@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/alexcambose/virtual-dom.svg?branch=master)](https://travis-ci.org/alexcambose/virtual-dom)
 
-A Virtual DOM algorithm implementation that improves front end performance by avoiding directly working with the DOM and only updating changed nodes.
+A Virtual DOM algorithm implementation that improves front end performance by updating only changed nodes in the DOM.
 
 ### [**DEMO**](https://alexcambose.github.io/virtual-dom/)
 

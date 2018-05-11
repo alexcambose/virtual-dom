@@ -1,7 +1,7 @@
 {
   "name": "virtual-dom",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Virtual DOM algorithm implementation that improves front end performance by updating only changed nodes in the DOM.",
   "main": "index.js",
   "scripts": {
     "test": "mocha --require babel-core/register",
@@ -13,9 +13,19 @@
     "type": "git",
     "url": "git+https://github.com/alexcambose/virtual-dom.git"
   },
-  "keywords": [],
+  "keywords": [
+      "virtual-dom",
+      "algorithm",
+      "react",
+      "dom",
+      "api",
+      "diffing",
+      "dom-manipulation",
+      "dom-events",
+      "dom-tree",
+  ],
   "author": "Alexandru Cambose",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/alexcambose/virtual-dom/issues"
   },
