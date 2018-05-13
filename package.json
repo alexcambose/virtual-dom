@@ -1,28 +1,28 @@
 {
   "name": "@alexcambose/virtual-dom",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Virtual DOM algorithm implementation that improves front end performance by updating only changed nodes in the DOM.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "mocha --require babel-core/register",
-    "prod": "NODE_ENV=production webpack",
-    "build": "NODE_ENV=development webpack",
-    "watch": "NODE_ENV=development webpack --watch"
+    "test": "cross-env mocha --require babel-core/register",
+    "prod": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=development webpack",
+    "watch": "cross-env NODE_ENV=development webpack --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexcambose/virtual-dom.git"
   },
   "keywords": [
-      "virtual-dom",
-      "algorithm",
-      "react",
-      "dom",
-      "api",
-      "diffing",
-      "dom-manipulation",
-      "dom-events",
-      "dom-tree"
+    "virtual-dom",
+    "algorithm",
+    "react",
+    "dom",
+    "api",
+    "diffing",
+    "dom-manipulation",
+    "dom-events",
+    "dom-tree"
   ],
   "author": "Alexandru Cambose",
   "license": "MIT",
@@ -31,17 +31,20 @@
   },
   "homepage": "https://github.com/alexcambose/virtual-dom#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-env": "^2.4.1",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chai": "^4.1.2",
     "jsdom": "^11.10.0",
     "mocha": "^5.1.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15"
+    "webpack-cli": "^2.0.15",
+    "cross-env": "^5.1.5"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
   }
 }
