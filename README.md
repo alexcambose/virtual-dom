@@ -20,7 +20,7 @@ Standalone script file
 ```javascript
 let newContent = null;
 
-// function thet will create virtual-dom object
+// the function that will create virtual-dom object
 const createDom = title => (
     h('div', null,
         h('h1', { className: 'header' }, title),
